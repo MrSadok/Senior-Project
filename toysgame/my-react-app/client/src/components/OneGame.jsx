@@ -9,7 +9,7 @@ function OneGame({ game, index, handleDelete }) {
         <div className="card-body">
           <h5 className="card-title">{game.name}</h5>
           <p className="card-text">{game.description}</p>
-          <h4 className="card-title">{game.price}</h4>
+          <h4 className="card-title">${game.price}</h4>
           <a href="#" className="btn-buy">
             Buy
           </a>
