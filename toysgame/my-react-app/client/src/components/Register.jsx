@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function Register(props) {
   const [isLogin, setIsLogin] = useState(true);
-  
+  const navigate = useNavigate();
  
   const [formData, setFormData] = useState({
     email: "",
@@ -25,7 +26,7 @@ function Register(props) {
       const response = await axios.post('http://localhost:3000/api/users/add', {
         username: formData.name,
         password: formData.password,
-        email: formData.email,  // Only send email if not logging in
+        email: formData.email,  
       });
   
       // Handle successful registration
@@ -42,7 +43,7 @@ function Register(props) {
       // Send POST request to register the user
       const response = await axios.post('http://localhost:3000/api/users/login', {
         password: formData.password,
-        email: formData.email,  // Only send email if not logging in
+        email: formData.email,  
       });
   
       // Handle successful login
@@ -50,7 +51,7 @@ function Register(props) {
       return response.data;
     } catch (error) {
       console.error('Error during user login:', error.response?.data || error.message);
-      throw error;  // Re-throw the error to handle it later (e.g., in the form submission handler)
+      throw error;  
     }
   };
 
@@ -61,20 +62,15 @@ const handleSubmit = async (e) => {
   if (isLogin) {
 
     const user = await LoginUser(formData);
-    props.Setuser(user);
+    props.Setuser(user.user.username);
+    console.log(user.user.username," ya youuuuseer");
     localStorage.setItem('token',user.token);
-
+    navigate('/')
   } else {
     try {
-      // Call the registerUser function
       const user = await registerUser(formData);
-
-      // Handle success (show a success message, redirect, etc.)
       alert(user.success);
-      // You can redirect the user after a successful registration
-      // Example: history.push('/login');
     } catch (error) {
-      // Handle registration error (e.g., show an error message)
       alert(error.response?.data?.message || 'Error registering user');
     }
   }

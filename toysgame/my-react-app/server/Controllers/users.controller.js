@@ -28,14 +28,10 @@ module.exports = {
         return res.status(400).send({ message: "Email already exists!" });
       }
   
-      // Hash the password asynchronously
+      // Hash the password 
       const hash = await bcrypt.hash(password, 10);
-  
-      // Create a new user in the database
-      const newUser = await Users.create({ username, password: hash, email });
-  
-      // Respond with a success message
-      res.status(201).send({
+        const newUser = await Users.create({ username, password: hash, email });
+        res.status(201).send({
         success: "User created successfully!",
         user: newUser,
       });
@@ -148,52 +144,3 @@ module.exports = {
     }
   },
 };
-LoginUser: async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    const user = await Users.findOne({
-      where: {
-        email: email,
-      },
-    });
-
-    if (!user) {
-      // Log invalid login attempt
-      console.error(`Login failed: No user found with email ${email}`);
-      return res.status(400).send({ message: "Invalid email or password" });
-    }
-
-    const checkPass = await bcrypt.compare(password, user.password);
-
-    if (!checkPass) {
-      // Log invalid password attempt
-      console.error(`Login failed: Incorrect password for email ${email}`);
-      return res.status(400).send({ message: "Invalid email or password" });
-    }
-
-    const token = jwt.sign(
-      { userId: user.id, email: user.email },
-      'your-secret-key',  // replace with your actual secret key
-      { expiresIn: '1h' }
-    );
-
-    // Log successful login attempt
-    console.log(`Login successful: User ${user.username} logged in at ${new Date().toISOString()}`);
-
-    res.status(200).send({
-      message: "Login successful",
-      token: token,
-      user: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-      },
-    });
-
-  } catch (error) {
-    // Log unexpected errors (server errors, database issues)
-    console.error(`Error during login: ${error.message}`);
-    res.status(500).send({ message: "Internal server error" });
-  }
-}

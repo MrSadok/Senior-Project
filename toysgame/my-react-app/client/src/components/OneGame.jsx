@@ -17,19 +17,19 @@ function OneGame({ game, index, handleDelete }) {
           <h5 className="card-title">{game.name}</h5>
           <p className="card-text">{game.description}</p>
           <h4 className="card-title">{game.price}</h4>
-          <a href="#" className="btn btn-primary">
+          <a href="#" className="btn-buy">
             Buy
           </a>
           <Link
-            className="btn btn-warning"
+            className="btn-update"
             to={`/update/${game.id}`} // Pass the game ID to the UpdateGame component
-            state={{ game }} // Pass the game data as state
+            state={{ game }}// Pass the game data as state
           >
             Update Game
           </Link>{" "}
           <a
             href="#"
-            className="btn btn-primary"
+            className="btn-delete"
             onClick={() => handleDelete(game.id)}
           >
             Delete

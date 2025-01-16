@@ -5,22 +5,17 @@ import {
   Routes,
   Route,
   Link,
-  useNavigate,
+  
 } from "react-router-dom";
 import OneGame from "./OneGame";
 import AddGame from "./AddGame";
 
 function Games({ data, handleDelete, handleAdd }) {
-  const [addGame, setAddGame] = useState(false);
-  const navigate = useNavigate();
-  const handleAddGame = () => {
-    setAddGame(true);
-    navigate("/added");
-  };
+  
 
   return (
     <>
-      <Link className="navbar-brand" to="/added" onClick={handleAddGame}>
+      <Link className="navbar-brand" to="/added" class="add-game-button">
         Add Game
       </Link>
       <br></br>

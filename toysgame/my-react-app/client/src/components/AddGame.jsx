@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link,useNavigate } from "react-router-dom";
 
 
 function AddGame({handleAdd}) {
@@ -10,7 +10,15 @@ function AddGame({handleAdd}) {
   const [quantity,setQuantity]=useState()
   const [imageUrl,setImage]=useState('')
   const [category,setCategory]=useState('')
-   
+  const navigate = useNavigate();  // Use useNavigate to handle redirection
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent form from refreshing the page
+    // Call the handleAdd function passed from App.js
+    await handleAdd({ name, description, price, quantity, imageUrl, category });
+    // Redirect to homepage (you can change the route as needed)
+    navigate("/"); // Redirect to home or any other route after adding the game
+  };
   // console.log("nameGame",nameGame)
   // console.log("description",description)
   // console.log("price",price)
@@ -49,7 +57,7 @@ function AddGame({handleAdd}) {
     <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Category" onChange={(e)=>setCategory(e.target.value)}/>
   </div>
 
-  <button type="submit" className="btn btn-primary" onClick={()=>handleAdd({name,description,imageUrl,price,quantity})}>Add The Game</button>
+  <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Add The Game</button>
    
 
      </div>

@@ -13,7 +13,7 @@ module.exports = (connection, DataTypes) => {
         allowNull: true
     } ,
         imageUrl: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     } ,   price: {
       type: DataTypes.INTEGER,

@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import Register from "../../client/src/components/Register";
 import Games from "../../client/src/components/Games";
 import Cart from "../../client/src/components/Cart";
-import Login from "../../client/src/components/Login";
 import axios from "axios";
 import AddGame from "./components/AddGame";
 import UpdateGame from "./components/UpdateGame";
 function App() {
+
   const [data, setData] = useState([]);
-  const [fullData, setFullData] = useState([]);  // Store full data
+  const [fullData, setFullData] = useState([]);  
   const [search, setSearch] = useState("");
-const [user, Setuser] = useState();
+const [user, Setuser] = useState(null);
   const handleSearch = (text) => {
     setSearch(text);
     if (text === "") {
@@ -39,6 +39,7 @@ const [user, Setuser] = useState();
   };
   useEffect(() => {
     fetch();
+    console.log(user,"useeeeeer")
   }, []);
 
   const handleUpdateGame = async (id, updatedGame) => {
@@ -64,7 +65,7 @@ const [user, Setuser] = useState();
       );
       // console.log(response.data);
       fetch();
-      navigate("/");
+     
     } catch (error) {
       console.error(error);
     }
@@ -107,11 +108,6 @@ const [user, Setuser] = useState();
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
                 <Link className="nav-link" to="/register">
                   Register
                 </Link>
@@ -122,8 +118,13 @@ const [user, Setuser] = useState();
                 </Link>
               </li>
             </ul> 
-            <h1>{user}</h1>
+            
             <div className="d-flex ms-auto">
+            {user && (
+              <div className="me-3 text-light">
+                Welcome, {user}!
+              </div>
+            )}
               <input
                 className="form-control me-2"
                 type="search"
@@ -156,7 +157,6 @@ const [user, Setuser] = useState();
             }
           />
           <Route path="/register" element={<Register Setuser={Setuser}/>} />
-          <Route path="/login" element={<Login />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/added" element={<AddGame handleAdd={handleAdd} />} />
           <Route
