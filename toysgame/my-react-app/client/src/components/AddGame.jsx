@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link,useNavigate } from "react-router-dom";
+import { BrowserRouter as Routes, Route, Link,useNavigate } from "react-router-dom";
 
 
 function AddGame({handleAdd}) {
@@ -10,14 +10,12 @@ function AddGame({handleAdd}) {
   const [quantity,setQuantity]=useState()
   const [imageUrl,setImage]=useState('')
   const [category,setCategory]=useState('')
-  const navigate = useNavigate();  // Use useNavigate to handle redirection
+  const navigate = useNavigate();  
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent form from refreshing the page
-    // Call the handleAdd function passed from App.js
+    e.preventDefault(); 
     await handleAdd({ name, description, price, quantity, imageUrl, category });
-    // Redirect to homepage (you can change the route as needed)
-    navigate("/"); // Redirect to home or any other route after adding the game
+    navigate("/"); // Redirect to home 
   };
   // console.log("nameGame",nameGame)
   // console.log("description",description)

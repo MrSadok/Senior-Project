@@ -1,13 +1,6 @@
 import React from "react";
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-/**
- * App Component
- *
- * This component represents the main application component.
- * It contains the navigation bar and the main content.
- */
 function OneGame({ game, index, handleDelete }) {
   return (
     <div className=" col-md-3 col-12 pr-0">
@@ -22,7 +15,7 @@ function OneGame({ game, index, handleDelete }) {
           </a>
           <Link
             className="btn-update"
-            to={`/update/${game.id}`} // Pass the game ID to the UpdateGame component
+            to={`/update/${game.id}`} // Pass the game ID to the UpdateGame comp
             state={{ game }}// Pass the game data as state
           >
             Update Game

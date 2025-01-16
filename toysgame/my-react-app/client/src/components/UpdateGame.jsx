@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 
 function UpdateGame({ handleUpdateGame }) {
-  const { id } = useParams(); // Get the game ID from the URL
-  const { state } = useLocation(); // Access the game data passed via state
+  const { id } = useParams(); 
+  const { state } = useLocation(); 
   const navigate = useNavigate();
 
-  // Initialize state with the game data
   const [name, setName] = useState(state.game.name);
   const [description, setDescription] = useState(state.game.description);
   const [price, setPrice] = useState(state.game.price);
@@ -26,8 +25,8 @@ function UpdateGame({ handleUpdateGame }) {
 
     try {
       console.log(id,"iiid")
-      await handleUpdateGame(id, updatedGame); // Call the handleUpdate function from App.jsx
-      navigate("/"); // Redirect to the home page after updating
+      await handleUpdateGame(id, updatedGame); 
+      navigate("/"); 
     } catch (error) {
       console.error("Error updating game:", error);
     }

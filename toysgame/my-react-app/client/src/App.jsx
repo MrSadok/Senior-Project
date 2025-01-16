@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import Register from "../../client/src/components/Register";
 import Games from "../../client/src/components/Games";
-import Cart from "../../client/src/components/Cart";
 import axios from "axios";
 import AddGame from "./components/AddGame";
 import UpdateGame from "./components/UpdateGame";
@@ -15,7 +14,7 @@ const [user, Setuser] = useState(null);
   const handleSearch = (text) => {
     setSearch(text);
     if (text === "") {
-      setData(fullData);  // Reset to all data when search is cleared
+      setData(fullData);  // Reset data when search is cleared
     } else {
       const filteredGames = fullData.filter((game) => 
         game.name.toLowerCase().includes(text.toLowerCase())
@@ -112,11 +111,7 @@ const [user, Setuser] = useState(null);
                   Register
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/contact">
-                  Contact
-                </Link>
-              </li>
+              
             </ul> 
             
             <div className="d-flex ms-auto">
@@ -157,7 +152,6 @@ const [user, Setuser] = useState(null);
             }
           />
           <Route path="/register" element={<Register Setuser={Setuser}/>} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/added" element={<AddGame handleAdd={handleAdd} />} />
           <Route
             path="/update/:id"

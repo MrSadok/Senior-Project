@@ -21,8 +21,7 @@ function Register(props) {
   };
 
   const registerUser = async (formData) => {
-    try {
-      // Send POST request to register the user
+    try { //send the post register req
       const response = await axios.post('http://localhost:3000/api/users/add', {
         username: formData.name,
         password: formData.password,
@@ -34,13 +33,12 @@ function Register(props) {
       return response.data;
     } catch (error) {
       console.error('Error during user registration:', error.response?.data || error.message);
-      throw error;  // Re-throw the error to handle it later (e.g., in the form submission handler)
+      throw error; 
     }
   };
 
   const LoginUser = async (formData) => {
     try {
-      // Send POST request to register the user
       const response = await axios.post('http://localhost:3000/api/users/login', {
         password: formData.password,
         email: formData.email,  
